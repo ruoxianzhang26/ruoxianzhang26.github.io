@@ -1048,3 +1048,136 @@ kbd {
   .status-dot::after { display: none; }
   .reveal { opacity: 1; transform: none; }
 }
+
+/* =================================================================
+   Fig. 2 · one jump, three layers (pose-keypoint sequence)
+   ================================================================= */
+.jump-sec { padding: 4px 0 clamp(64px, 8vw, 104px); }
+.jump {
+  --behav: #62d49a;
+  position: relative;
+  margin: 0;
+  background: linear-gradient(180deg, rgba(24, 32, 47, 0.78), rgba(13, 18, 28, 0.9));
+  border: 1px solid var(--line-2);
+  border-radius: 20px;
+  box-shadow: 0 50px 120px -60px rgba(0, 0, 0, 0.8), inset 0 1px 0 rgba(255, 255, 255, 0.05);
+  overflow: hidden;
+}
+.jump-head {
+  display: flex; align-items: center; justify-content: space-between;
+  gap: 10px 16px; flex-wrap: wrap;
+  padding: 11px 16px;
+  border-bottom: 1px solid var(--line);
+}
+.jump-title { margin: 0; font: 500 13.5px/1.3 var(--sans); }
+.jump-fig { font: 500 11px var(--mono); color: var(--brain); margin-right: 8px; letter-spacing: 0.04em; }
+.jump-chips { display: flex; gap: 6px; flex-wrap: wrap; }
+.jchip {
+  display: inline-flex; align-items: center; gap: 8px;
+  height: 28px; padding: 0 12px;
+  border: 1px solid var(--line-2); border-radius: 999px;
+  background: rgba(255, 255, 255, 0.03);
+  color: var(--soft);
+  font: 400 11.5px/1 var(--mono); letter-spacing: 0.03em;
+  cursor: pointer;
+  transition: background 0.2s, border-color 0.2s, color 0.2s;
+}
+.jchip:hover, .jchip.on { color: var(--text); border-color: rgba(255, 255, 255, 0.3); background: rgba(255, 255, 255, 0.07); }
+.jchip[aria-pressed="true"] { border-color: rgba(255, 255, 255, 0.55); }
+.jchip-dot { width: 7px; height: 7px; border-radius: 50%; }
+.jchip-brain .jchip-dot { background: var(--brain); box-shadow: 0 0 8px var(--brain); }
+.jchip-move .jchip-dot { background: var(--move); box-shadow: 0 0 8px var(--move); }
+.jchip-behav .jchip-dot { background: var(--behav); box-shadow: 0 0 8px var(--behav); }
+
+.jump-stage { position: relative; padding: 10px 16px 2px; }
+.jump-svg { width: 100%; height: auto; display: block; overflow: visible; }
+.js .jump-svg { cursor: ew-resize; }
+
+.j-grid { stroke: rgba(255, 255, 255, 0.045); stroke-width: 1; }
+.j-ground, .j-tick { stroke: rgba(255, 255, 255, 0.3); stroke-width: 1; }
+.j-com { fill: none; stroke: var(--move); stroke-width: 1.3; stroke-dasharray: 1 6; stroke-linecap: round; opacity: 0.7; }
+.jf { opacity: var(--o); }
+.j-bone { fill: none; stroke: #9aa3b5; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+.j-head { fill: var(--bg); stroke: #9aa3b5; stroke-width: 1.6; }
+.j-kp { fill: var(--move); stroke: var(--bg); stroke-width: 1.2; }
+.j-eeg { fill: var(--brain); stroke: var(--bg); stroke-width: 1; }
+.j-phase { font: 400 11px var(--mono); letter-spacing: 0.04em; fill: var(--muted); transition: fill 0.2s; }
+.js .j-phase { cursor: pointer; }
+.j-phase .j-phase-n { fill: rgba(255, 255, 255, 0.3); }
+.j-phase:hover { fill: var(--soft); }
+.j-phase.on { fill: var(--text); }
+.j-phase.on .j-phase-n { fill: var(--move-text); }
+
+.j-ann { transition: opacity 0.3s; }
+.j-tagbg { fill: #0d121c; opacity: 0.74; }
+.j-kick { font: 500 10.5px var(--mono); letter-spacing: 0.14em; }
+.j-desc, .j-dimtext { font-family: var(--serif); font-style: italic; font-size: 16.5px; fill: var(--text); }
+.j-lead { fill: none; stroke-width: 1; }
+.j-target { fill: none; stroke-width: 1.2; }
+.a-brain .j-kick { fill: var(--brain); }
+.a-brain .j-lead, .a-brain .j-target { stroke: var(--brain); }
+.a-move .j-kick { fill: var(--move-text); }
+.a-move .j-lead, .a-move .j-target { stroke: var(--move); }
+.a-behav .j-kick { fill: var(--behav); }
+.j-dim { stroke: var(--behav); color: var(--behav); stroke-width: 1.3; }
+.j-dimext { stroke: var(--behav); stroke-width: 1; stroke-dasharray: 2 3; opacity: 0.55; }
+
+/* live figure, driven by script.js */
+.j-live { display: none; }
+.js .j-live { display: inline; }
+.js .jf .j-eeg { display: none; }
+.j-live-bone { fill: none; stroke: #f4f6fa; stroke-width: 3; stroke-linecap: round; stroke-linejoin: round; filter: drop-shadow(0 0 5px rgba(255, 255, 255, 0.28)); }
+.j-live-head { fill: var(--bg); stroke: #f4f6fa; stroke-width: 2.2; }
+.j-live-kp { fill: var(--move); stroke: var(--bg); stroke-width: 1.4; filter: drop-shadow(0 0 4px rgba(255, 95, 5, 0.9)); }
+.j-live-eeg { fill: var(--brain); stroke: var(--bg); stroke-width: 1.1; filter: drop-shadow(0 0 4px rgba(90, 209, 230, 0.95)); }
+
+/* layer focus (chips) */
+.jump-svg .j-live-kp, .jump-svg .j-live-eeg, .jump-svg .j-kp { transition: opacity 0.3s; }
+.focus-brain .a-move, .focus-brain .a-behav, .focus-brain .j-live-kp, .focus-brain .j-kp, .focus-brain .j-com { opacity: 0.12; }
+.focus-move .a-brain, .focus-move .a-behav, .focus-move .j-live-eeg { opacity: 0.12; }
+.focus-behav .a-brain, .focus-behav .a-move, .focus-behav .j-live-eeg, .focus-behav .j-live-kp { opacity: 0.12; }
+.focus-brain .j-live-eeg, .focus-move .j-live-kp { animation: jpulse 1s ease-in-out infinite; transform-box: fill-box; transform-origin: center; }
+.focus-behav .j-dim { stroke-width: 2.4; }
+@keyframes jpulse { 50% { transform: scale(1.6); } }
+
+/* entrance */
+.js .jump-svg { opacity: 0; transform: translateY(8px); transition: opacity 0.9s ease, transform 0.9s ease; }
+.js .jump.in .jump-svg { opacity: 1; transform: none; }
+
+/* controls */
+.jump-controls {
+  display: flex; align-items: center; gap: 12px;
+  padding: 10px 16px;
+  border-top: 1px solid var(--line);
+  background: rgba(255, 255, 255, 0.012);
+  font: 400 11.5px/1.3 var(--mono); color: var(--muted);
+}
+.jump-controls[hidden] { display: none; }
+.jump-play { width: 32px; min-width: 32px; padding: 0; justify-content: center; }
+.jump-play .ico { display: block; width: 10px; height: 11px; }
+.jump-play[aria-pressed="true"] .ico { border-left: 3px solid currentColor; border-right: 3px solid currentColor; }
+.jump-play[aria-pressed="false"] .ico { width: 0; height: 0; border-style: solid; border-width: 6px 0 6px 10px; border-color: transparent transparent transparent currentColor; transform: translateX(1px); }
+.jump-scrub { flex: 1; max-width: 460px; -webkit-appearance: none; appearance: none; height: 20px; background: transparent; cursor: pointer; }
+.jump-scrub::-webkit-slider-runnable-track { height: 2px; border-radius: 2px; background: rgba(255, 255, 255, 0.18); }
+.jump-scrub::-moz-range-track { height: 2px; border-radius: 2px; background: rgba(255, 255, 255, 0.18); }
+.jump-scrub::-webkit-slider-thumb { -webkit-appearance: none; width: 12px; height: 12px; margin-top: -5px; border-radius: 50%; background: var(--move); border: 2px solid var(--bg); box-shadow: 0 0 0 1px var(--move), 0 0 10px rgba(255, 95, 5, 0.8); }
+.jump-scrub::-moz-range-thumb { width: 10px; height: 10px; border-radius: 50%; background: var(--move); border: 2px solid var(--bg); box-shadow: 0 0 0 1px var(--move); }
+.jump-phase { min-width: 92px; color: var(--text); }
+.jump-hint { margin-left: auto; color: var(--muted); opacity: 0.75; }
+@media (hover: none) { .jump-hint { display: none; } }
+.jump-cap { margin: 0; padding: 12px 16px 14px; border-top: 1px solid var(--line); font-size: 13px; line-height: 1.55; color: var(--muted); }
+
+@media (max-width: 860px) {
+  .jump-stage { overflow-x: auto; -webkit-overflow-scrolling: touch; scrollbar-width: none; }
+  .jump-stage::-webkit-scrollbar { display: none; }
+  .jump-svg { min-width: 760px; }
+  .jump-hint { display: none; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .js .jump-svg { opacity: 1; transform: none; transition: none; }
+  .focus-brain .j-live-eeg, .focus-move .j-live-kp { animation: none; }
+}
+@media print { .jump-controls { display: none; } }
+/* without JavaScript: static figure only, room for the fixed callouts, no inert chips */
+html:not(.js) .jump-chips { display: none; }
+html:not(.js) .jump-stage { padding-top: 34px; }

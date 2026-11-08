@@ -1181,3 +1181,276 @@
     sync();
   }
 })();
+
+// ---------------------------------------------------------------
+// Fig. 2: pose-keypoint figure performing the standing long jump
+// (scrub with the pointer, play/pause, phase labels, layer chips)
+// ---------------------------------------------------------------
+(function () {
+  "use strict";
+
+  function initJump() {
+    var fig = document.getElementById("jump");
+    var dataEl = document.getElementById("jump-data");
+    if (!fig || !dataEl || !window.requestAnimationFrame) return;
+    var D = JSON.parse(dataEl.textContent);
+    var Lg = D.L, F = D.frames, N = F.length, GROUND = D.ground, W = D.W;
+    var svg = fig.querySelector(".jump-svg");
+    var reduce = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+    var controls = fig.querySelector(".jump-controls");
+    var playBtn = fig.querySelector(".jump-play");
+    var scrub = fig.querySelector(".jump-scrub");
+    var out = fig.querySelector(".jump-phase");
+    controls.hidden = false;
+
+    var trail = svg.querySelectorAll(".jf");
+    var phases = svg.querySelectorAll(".j-phase");
+    var bone = svg.querySelector("#j-live-bone");
+    var head = svg.querySelector("#j-live-head");
+    var kp = {};
+    Array.prototype.forEach.call(svg.querySelectorAll(".j-live-kp"), function (el) { kp[el.getAttribute("data-k")] = el; });
+    var eegs = svg.querySelectorAll(".j-live-eeg");
+    var dimLine = svg.querySelector("#j-dim");
+    var dimGroup = svg.querySelector(".a-behav");
+    var dimLabel = dimGroup ? dimGroup.querySelectorAll(".j-tagbg, .j-dimtext") : [];
+    var KEYS = ["t", "h", "s", "ua", "fa", "foot"];
+    var R = Math.PI / 180;
+
+    function tagParts(id) {
+      var g = svg.querySelector(id);
+      return { g: g, lead: g.querySelector(".j-lead"), target: g.querySelector(".j-target"), bg: g.querySelector(".j-tagbg"),
+               kick: g.querySelector(".j-kick"), desc: g.querySelector(".j-desc"), w: parseFloat(g.querySelector(".j-tagbg").getAttribute("width")),
+               ax: null, ay: null };
+    }
+    var tags = { brain: tagParts("#j-tag-brain"), move: tagParts("#j-tag-move") };
+
+    // --- kinematics (mirrors the generator) ---
+    function vd(a, len) { return [len * Math.sin(a * R), len * Math.cos(a * R)]; }   // from straight down
+    function vu(a, len) { return [len * Math.sin(a * R), -len * Math.cos(a * R)]; }  // from straight up
+    function add(p, d) { return [p[0] + d[0], p[1] + d[1]]; }
+    function pose(hip, q) {
+      var neck = add(hip, vu(q.t, Lg.trunk));
+      var hd = add(neck, vu(q.t * 0.55, Lg.neck + Lg.head_r));
+      var sh = add(neck, vu(q.t, -Lg.shoulder_drop));
+      var el = add(sh, vd(q.ua, Lg.ua));
+      var wr = add(el, vd(q.fa, Lg.fa));
+      var kn = add(hip, vd(q.h, Lg.th));
+      var an = add(kn, vd(q.s, Lg.sh));
+      var toe = [an[0] + Lg.foot * Math.cos(q.foot * R), an[1] + Lg.foot * Math.sin(q.foot * R)];
+      return { hip: hip, neck: neck, head: hd, sh: sh, el: el, wr: wr, kn: kn, an: an, toe: toe };
+    }
+    function cr(p0, p1, p2, p3, t) {
+      return 0.5 * (2 * p1 + (-p0 + p2) * t + (2 * p0 - 5 * p1 + 4 * p2 - p3) * t * t + (-p0 + 3 * p1 - 3 * p2 + p3) * t * t * t);
+    }
+    function sample(u) {
+      var i = Math.min(Math.floor(u), N - 2), t = u - i;
+      var a = F[Math.max(i - 1, 0)], b = F[i], c = F[i + 1], d = F[Math.min(i + 2, N - 1)];
+      var q = {};
+      KEYS.forEach(function (k) { q[k] = cr(a[k], b[k], c[k], d[k], t); });
+      var hx = cr(a.hip[0], b.hip[0], c.hip[0], d.hip[0], t);
+      var hy = cr(a.hip[1], b.hip[1], c.hip[1], d.hip[1], t);
+      var p = pose([0, 0], q);
+      var low = Math.max(p.an[1] + Lg.ankle, p.toe[1]);
+      var groundedY = GROUND - low;
+      var inContact = u <= 2 || u >= N - 1.02;
+      return pose([hx, inContact ? groundedY : Math.min(hy, groundedY)], q);
+    }
+
+    // --- timeline: seconds per transition, then a hold on landing ---
+    var SEG = [0.8, 0.45, 0.3, 0.28, 0.3, 0.36];
+    var HOLD_START = 0.45, HOLD_END = 1.2;
+    var MOVE_T = SEG.reduce(function (s, x) { return s + x; }, 0);
+    var CYCLE = HOLD_START + MOVE_T + HOLD_END;
+    function uAt(time) {
+      var tm = time - HOLD_START;
+      if (tm <= 0) return 0;
+      for (var i = 0; i < SEG.length; i++) {
+        if (tm <= SEG[i]) return i + tm / SEG[i];
+        tm -= SEG[i];
+      }
+      return N - 1;
+    }
+    function timeAt(u) {
+      var tm = HOLD_START, i = 0;
+      for (; i < Math.floor(u) && i < SEG.length; i++) tm += SEG[i];
+      if (i < SEG.length) tm += (u - i) * SEG[i];
+      return tm;
+    }
+
+    function f1(n) { return n.toFixed(1); }
+    function seg(a, b) { return "M" + f1(a[0]) + " " + f1(a[1]) + "L" + f1(b[0]) + " " + f1(b[1]); }
+    function setC(el, p) { el.setAttribute("cx", f1(p[0])); el.setAttribute("cy", f1(p[1])); }
+
+    function placeTag(tg, target, want, snap) {
+      if (tg.ax === null || snap) { tg.ax = want[0]; tg.ay = want[1]; }
+      tg.ax += (want[0] - tg.ax) * 0.2;
+      tg.ay += (want[1] - tg.ay) * 0.2;
+      var ax = tg.ax, ay = tg.ay;
+      tg.lead.setAttribute("d", "M" + f1(target[0]) + " " + f1(target[1]) + " L" + f1(ax + (ax > target[0] ? 0 : tg.w - 12)) + " " + f1(ay + 14));
+      setC(tg.target, target);
+      tg.bg.setAttribute("x", f1(ax - 6)); tg.bg.setAttribute("y", f1(ay - 12));
+      tg.kick.setAttribute("x", f1(ax)); tg.kick.setAttribute("y", f1(ay + 2));
+      tg.desc.setAttribute("x", f1(ax)); tg.desc.setAttribute("y", f1(ay + 19));
+    }
+    function wantPos(target, dx, dy, w, minY, maxY) {
+      var x = target[0] + dx;
+      if (x + w > W - 8) x = target[0] - Math.abs(dx) - w;   // flip to the left near the edge
+      var y = Math.max(minY, Math.min(maxY, target[1] + dy));
+      return [x, y];
+    }
+
+    var lastPhase = -1;
+    function render(u, snap) {
+      var p = sample(u);
+      bone.setAttribute("d", [seg(p.hip, p.neck), seg(p.sh, p.el), seg(p.el, p.wr), seg(p.hip, p.kn), seg(p.kn, p.an), seg(p.an, p.toe)].join(" "));
+      setC(head, p.head);
+      for (var k in kp) setC(kp[k], p[k]);
+      var r = Lg.head_r;
+      [-70, -35, 0, 35, 70].forEach(function (a, n) {
+        setC(eegs[n], [p.head[0] + r * Math.sin(a * R), p.head[1] - r * Math.cos(a * R)]);
+      });
+
+      // trail frames: faint before the figure arrives, exposed after it passes
+      Array.prototype.forEach.call(trail, function (g, i) {
+        var near = Math.exp(-((u - i) * (u - i)) / 0.16);
+        var base = u + 0.15 >= i ? 0.4 : 0.2;
+        g.style.opacity = String(base + (0.85 - base) * near);
+      });
+
+      var ph = Math.min(N - 1, Math.round(u));
+      if (ph !== lastPhase) {
+        Array.prototype.forEach.call(phases, function (t, i) { t.classList.toggle("on", i === ph); });
+        out.textContent = "0" + (ph + 1) + " " + D.names[ph];
+        lastPhase = ph;
+      }
+
+      var headTop = [p.head[0], p.head[1] - r - 1];
+      placeTag(tags.brain, headTop, wantPos(headTop, 34, -62, tags.brain.w, 16, GROUND - 120), snap);
+      placeTag(tags.move, p.kn, wantPos(p.kn, 30, 36, tags.move.w, 120, GROUND - 46), snap);
+
+      // behaviour: the distance line grows during flight
+      var prog = Math.max(0, Math.min(1, (u - 2) / (N - 3)));
+      dimLine.setAttribute("x2", f1(D.dim[0] + (D.dim[1] - D.dim[0]) * prog));
+      dimLine.style.opacity = u < 2 ? "0" : "1";
+      var lab = Math.max(0, Math.min(1, (u - 4.6) / 1.2));
+      Array.prototype.forEach.call(dimLabel, function (el) { el.style.opacity = String(0.25 + 0.75 * lab); });
+      scrub.value = String(Math.round(u * 100));
+      follow(p.hip[0]);
+    }
+
+    // on narrow screens the figure scrolls sideways; keep the jumper in view
+    var stage = fig.querySelector(".jump-stage");
+    var userScrollUntil = 0;
+    ["touchstart", "wheel"].forEach(function (ev) {
+      stage.addEventListener(ev, function () { userScrollUntil = Date.now() + 4000; }, { passive: true });
+    });
+    function follow(x) {
+      if (stage.scrollWidth <= stage.clientWidth + 2 || Date.now() < userScrollUntil || hovering) return;
+      var scale = svg.clientWidth / W;
+      var target = Math.max(0, Math.min(stage.scrollWidth - stage.clientWidth, x * scale - stage.clientWidth * 0.45));
+      stage.scrollLeft += (target - stage.scrollLeft) * 0.12;
+    }
+
+    // --- state & loop ---
+    var playing = !reduce, visible = false, hovering = false, clock = 0, last = 0, rafId = 0, started = false;
+    var u = reduce ? 4 : 0;
+    function setPlaying(v) {
+      playing = v;
+      playBtn.setAttribute("aria-pressed", String(v));
+      playBtn.setAttribute("aria-label", v ? "Pause animation" : "Play animation");
+      if (v) { clock = u >= N - 1 ? 0 : timeAt(u); kick(); }
+    }
+    function tick(now) {
+      rafId = 0;
+      var dt = last ? Math.min(0.05, (now - last) / 1000) : 0;
+      last = now;
+      if (playing && !hovering && visible) {
+        clock = (clock + dt) % CYCLE;
+        u = uAt(clock);
+      }
+      render(u, false);
+      if (visible && (playing || hovering || needsSettle())) rafId = requestAnimationFrame(tick);
+      else last = 0;
+    }
+    function needsSettle() {
+      // keep animating briefly while labels ease into place
+      return Math.abs(tags.brain.ax - (tags.brain._lastX || 0)) > 0.3 && (tags.brain._lastX = tags.brain.ax, true);
+    }
+    function kick() { if (!rafId && visible) { last = 0; rafId = requestAnimationFrame(tick); } }
+
+    render(u, true);
+
+    // pointer scrubbing (mouse/pen; touch scrolls the figure instead)
+    function uFromEvent(e) {
+      var rect = svg.getBoundingClientRect();
+      var x = (e.clientX - rect.left) / rect.width * W;
+      return Math.max(0, Math.min(N - 1, (x - D.xs[0]) / (D.xs[N - 1] - D.xs[0]) * (N - 1)));
+    }
+    svg.addEventListener("pointermove", function (e) {
+      if (e.pointerType === "touch") return;
+      hovering = true; svg.classList.add("scrubbing");
+      u = uFromEvent(e); kick();
+    });
+    svg.addEventListener("pointerleave", function () {
+      if (!hovering) return;
+      hovering = false; svg.classList.remove("scrubbing");
+      clock = timeAt(u); kick();
+    });
+    scrub.addEventListener("input", function () {
+      setPlaying(false);
+      u = Number(scrub.value) / 100; kick();
+    });
+    playBtn.addEventListener("click", function () { setPlaying(!playing); });
+
+    // phase labels jump to that frame
+    Array.prototype.forEach.call(phases, function (t) {
+      t.setAttribute("tabindex", "0");
+      t.setAttribute("role", "button");
+      t.setAttribute("aria-label", "Show phase " + t.textContent.trim());
+      function go() { setPlaying(false); u = Number(t.getAttribute("data-i")); kick(); }
+      t.addEventListener("click", go);
+      t.addEventListener("keydown", function (e) { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); go(); } });
+    });
+
+    // layer chips
+    var sticky = null;
+    var chips = fig.querySelectorAll(".jchip");
+    function focusLayer(layer) {
+      ["brain", "move", "behav"].forEach(function (l) { svg.classList.toggle("focus-" + l, l === layer); });
+      Array.prototype.forEach.call(chips, function (c) { c.classList.toggle("on", c.getAttribute("data-layer") === layer); });
+    }
+    Array.prototype.forEach.call(chips, function (c) {
+      var layer = c.getAttribute("data-layer");
+      c.setAttribute("aria-pressed", "false");
+      c.addEventListener("mouseenter", function () { focusLayer(layer); });
+      c.addEventListener("mouseleave", function () { focusLayer(sticky); });
+      c.addEventListener("focus", function () { focusLayer(layer); });
+      c.addEventListener("blur", function () { focusLayer(sticky); });
+      c.addEventListener("click", function () {
+        sticky = sticky === layer ? null : layer;
+        Array.prototype.forEach.call(chips, function (x) { x.setAttribute("aria-pressed", String(x.getAttribute("data-layer") === sticky)); });
+        focusLayer(sticky || layer);
+      });
+    });
+
+    // run only while on screen; entrance sweep the first time
+    if ("IntersectionObserver" in window) {
+      new IntersectionObserver(function (entries) {
+        entries.forEach(function (en) {
+          visible = en.isIntersecting;
+          if (visible && !started) {
+            started = true;
+            fig.classList.add("in");
+            setTimeout(function () { clock = 0; kick(); }, reduce ? 0 : 1300);
+          } else if (visible) { kick(); }
+        });
+      }, { threshold: 0.15 }).observe(fig);
+    } else { visible = true; fig.classList.add("in"); kick(); }
+    // fail-safe: never leave the figure hidden if the observer is slow to report
+    setTimeout(function () { if (!started) { started = true; visible = true; fig.classList.add("in"); kick(); } }, 2500);
+    if (reduce) setPlaying(false);
+  }
+
+  initJump();
+})();
