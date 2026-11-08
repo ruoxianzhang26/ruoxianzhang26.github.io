@@ -1,0 +1,679 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Ruoxian Zhang · Kinesiology, University of Illinois Urbana-Champaign</title>
+  <meta name="description" content="Ruoxian (Rosen) Zhang is an M.S. student in Kinesiology at the University of Illinois Urbana-Champaign studying brain, behaviour and movement across development with EEG, fNIRS, motion capture and AI-assisted movement assessment.">
+  <meta name="author" content="Ruoxian Zhang">
+  <meta property="og:type" content="profile">
+  <meta property="og:title" content="Ruoxian Zhang · Kinesiology, University of Illinois Urbana-Champaign">
+  <meta property="og:description" content="Brain, behaviour and movement across development. M.S. student in Kinesiology at the University of Illinois Urbana-Champaign, applying to PhD programs for Fall 2027.">
+  <meta name="theme-color" content="#0b0f17">
+  <meta name="color-scheme" content="dark">
+  <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Geist:wght@300;400;500;600&family=Geist+Mono:wght@400;500&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+  <script>document.documentElement.classList.add("js");</script>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+
+  <header class="site-header">
+    <div class="wrap header-inner">
+      <a class="lockup" href="#top" aria-label="Ruoxian Zhang, back to top">
+        <span class="mark" aria-hidden="true">rz<i>.</i></span>
+        <span class="lockup-name">Ruoxian Zhang</span>
+      </a>
+      <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="site-nav">
+        <span class="nav-toggle-bars" aria-hidden="true"></span>
+        <span class="nav-toggle-label">Menu</span>
+      </button>
+      <nav class="site-nav" id="site-nav" aria-label="Main">
+        <a href="#about">About</a>
+        <a href="#news">News</a>
+        <a href="#research">Research</a>
+        <a href="#publications">Publications</a>
+        <a href="#teaching">Teaching</a>
+        <a href="#education">Education</a>
+        <a href="#contact">Contact</a>
+        <a class="nav-cv" href="assets/Ruoxian_Zhang_CV.pdf" target="_blank" rel="noopener">CV <span aria-hidden="true">↗</span></a>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main">
+
+    <!-- ================= HERO ================= -->
+    <section class="hero" id="top" aria-labelledby="hero-name">
+      <div class="hero-bg" aria-hidden="true"></div>
+      <div class="wrap hero-grid">
+        <div class="hero-copy">
+          <p class="kicker">Department of Health and Kinesiology · University of Illinois <span class="nw">Urbana-Champaign</span></p>
+          <h1 id="hero-name">Ruoxian Zhang</h1>
+          <p class="tagline">Brain, behaviour and movement <em>across development.</em></p>
+          <p class="intro">
+            I am an M.S. student in Kinesiology at the University of Illinois <span class="nw">Urbana-Champaign</span> and a graduate research
+            assistant in Dr. Shelby Keye’s PLAY Lab. I work with EEG, fNIRS and markerless motion capture, and I lead a
+            project on AI-assisted movement assessment with the University of Toronto.
+          </p>
+          <div class="hero-actions">
+            <a class="btn btn-solid" href="assets/Ruoxian_Zhang_CV.pdf" target="_blank" rel="noopener">Curriculum vitae <span aria-hidden="true">↗</span></a>
+            <a class="btn btn-line" href="mailto:rz38@illinois.edu">rz38@illinois.edu</a>
+          </div>
+          <p class="status"><span class="status-dot" aria-hidden="true"></span>Applying to PhD programs for Fall 2027</p>
+        </div>
+
+        <figure class="rig" id="rig" aria-labelledby="rig-title" aria-describedby="rig-desc">
+          <div class="rig-top">
+            <p class="rig-title" id="rig-title"><span class="rig-fig">Fig. 1</span> One jump, recorded two ways</p>
+            <p class="rig-sub">Standing long jump · animated model</p>
+          </div>
+
+          <div class="rig-stage">
+          <div class="rig-view" id="rig-view" tabindex="0" role="group" aria-roledescription="interactive figure"
+               aria-label="Pose figure of a standing long jump. Drag, or use the left and right arrow keys, to rotate the view. Press Space to play or pause.">
+            <canvas class="pose-canvas" id="pose-canvas" aria-hidden="true"></canvas>
+
+            <svg class="rig-fallback" viewBox="0 0 640 360" role="img" aria-label="Pose-keypoint figure in mid-flight during a standing long jump, with three EEG electrode points on the head.">
+              <path class="fb-grid" d="M-70 325.3L234.3 221.1M-43 336L256.5 224.4M-13.4 347.8L279.9 227.7M19.2 360.9L304.5 231.3M55.4 375.2L330.5 235.1M95.6 391.3L357.9 239.1M140.6 409.2L386.9 243.3M191.4 429.5L417.5 247.7M249.2 452.5L450.1 252.4M315.4 478.9L484.6 257.4M392 509.4L521.5 262.8M481.8 545.2L560.7 268.5M588.4 587.7L602.7 274.5M-74.3 323.6L693.9 629.7M-23.4 306.4L680.9 545.3M20.4 291.6L671.4 483.8M58.6 278.7L664.2 437M92.1 267.4L658.5 400.2M121.8 257.4L653.9 370.5M148.3 248.4L650.1 346M172.1 240.4L647 325.5M193.5 233.1L644.3 308M213 226.6L642 293M230.7 220.6L639.9 279.9"/>
+              <path class="fb-bone" d="M323.5 239.8L359.8 220.6M359.8 220.6L335.1 178.2M311.1 246.1L347.4 226.9M347.4 226.9L325 181.4M335.1 178.2L325 181.4M364.1 127.8L335.1 178.2M345.2 130.5L325 181.4M364.1 127.8L345.2 130.5M364.1 127.8L398.7 117.1M345.2 130.5L370.2 113.3M398.7 117.1L425.6 98.1M370.2 113.3L393.5 87.4M374.7 108.1L376.5 102.4M374.7 108.1L373.2 102.6M376.5 102.4L367.8 100.4M373.2 102.6L360 100.7"/>
+              <circle class="fb-head" cx="364.6" cy="102.2" r="12.9"/>
+              <g class="fb-kp">
+                <circle cx="374.7" cy="108.1" r="2.2"/><circle cx="376.5" cy="102.4" r="2.2"/><circle cx="373.2" cy="102.6" r="2.2"/><circle cx="367.8" cy="100.4" r="2.2"/><circle cx="360" cy="100.7" r="2.2"/><circle cx="364.1" cy="127.8" r="3.2"/><circle cx="345.2" cy="130.5" r="3.2"/><circle cx="398.7" cy="117.1" r="3.2"/><circle cx="370.2" cy="113.3" r="3.2"/><circle cx="425.6" cy="98.1" r="3.2"/><circle cx="393.5" cy="87.4" r="3.2"/><circle cx="335.1" cy="178.2" r="3.2"/><circle cx="325" cy="181.4" r="3.2"/><circle cx="359.8" cy="220.6" r="3.2"/><circle cx="347.4" cy="226.9" r="3.2"/><circle cx="323.5" cy="239.8" r="3.2"/><circle cx="311.1" cy="246.1" r="3.2"/>
+              </g>
+              <g class="fb-eeg"><circle cx="375.4" cy="96.2" r="3"/><circle cx="369" cy="89.8" r="3"/><circle cx="360.5" cy="89.9" r="3"/></g>
+            </svg>
+
+            <div class="hud hud-phase" aria-hidden="true" data-js-only hidden>
+              <p class="hud-label">Phase</p>
+              <p class="phase-name" id="hud-phase">Ready</p>
+              <p class="phase-time" id="hud-time">0.00 s</p>
+            </div>
+            <p class="hud hud-hint" aria-hidden="true" data-js-only hidden><span class="drag-ico"></span>Drag to rotate</p>
+          </div>
+
+          <div class="hud hud-key">
+            <p class="hud-label">Pose estimate · 17 keypoints</p>
+            <ul class="legend">
+              <li><span class="lg lg-joint" aria-hidden="true"></span>Body keypoint</li>
+              <li><span class="lg lg-eeg" aria-hidden="true"></span>EEG electrode: Fz, Cz, Pz</li>
+              <li data-js-only hidden><span class="lg lg-trail" aria-hidden="true"></span>Hand and foot paths, last 0.4 s</li>
+              <li><span class="lg lg-grid" aria-hidden="true"></span>Floor grid, 40 cm squares</li>
+            </ul>
+          </div>
+          </div>
+
+          <div class="rig-controls" data-js-only hidden>
+            <button type="button" class="ctl ctl-play" id="ctl-play">
+              <span class="ico" aria-hidden="true"></span><span class="ctl-label">Pause</span><span class="sr-only"> animation</span>
+            </button>
+            <div class="seg" role="group" aria-label="Playback speed">
+              <button type="button" class="seg-btn" data-speed="0.5" aria-pressed="false">0.5×</button>
+              <button type="button" class="seg-btn" data-speed="1" aria-pressed="true">1×</button>
+            </div>
+            <button type="button" class="ctl ctl-reset" id="ctl-reset">Reset view</button>
+            <p class="ctl-keys" aria-hidden="true"><kbd>Space</kbd> play or pause <kbd>←</kbd><kbd>→</kbd> rotate</p>
+          </div>
+
+          <div class="strip" data-js-only hidden>
+            <div class="strip-head">
+              <p class="strip-title"><span class="rec" aria-hidden="true"></span>Live recording</p>
+              <p class="strip-note">Brain and body on one clock. Point at a channel, or tap it, to see where it comes from.</p>
+            </div>
+            <div class="strip-body" id="strip-body">
+              <canvas class="strip-canvas" id="strip-canvas" aria-hidden="true"></canvas>
+              <p class="lane-group lane-group-brain"><span>Brain activity · EEG</span><span class="tag">illustrative signals</span></p>
+              <button type="button" class="lane lane-brain" data-chan="fz" aria-pressed="false">
+                <span class="lane-label"><span class="lane-name">Fz</span><span class="lane-desc">front of head</span></span>
+              </button>
+              <button type="button" class="lane lane-brain" data-chan="cz" aria-pressed="false">
+                <span class="lane-label"><span class="lane-name">Cz</span><span class="lane-desc">top of head</span></span>
+              </button>
+              <button type="button" class="lane lane-brain" data-chan="pz" aria-pressed="false">
+                <span class="lane-label"><span class="lane-name">Pz</span><span class="lane-desc">back of head</span></span>
+              </button>
+              <p class="lane-group lane-group-move"><span>Movement · measured from the figure</span></p>
+              <button type="button" class="lane lane-move" data-chan="knee" aria-pressed="false">
+                <span class="lane-label"><span class="lane-name">Knee angle</span><span class="lane-desc lane-val" aria-hidden="true">–</span><span class="sr-only">, both knees</span></span>
+              </button>
+              <button type="button" class="lane lane-move" data-chan="hip" aria-pressed="false">
+                <span class="lane-label"><span class="lane-name">Hip height</span><span class="lane-desc lane-val" aria-hidden="true">–</span><span class="sr-only">, above the floor</span></span>
+              </button>
+              <p class="lane-phase"><span>Jump phase</span></p>
+            </div>
+          </div>
+
+          <figcaption class="rig-cap" id="rig-desc">
+            A standing long jump drawn as 17 pose keypoints, the skeleton format that markerless motion capture produces.
+            <span class="js-only">The orange traces are measured from this animated figure as it moves; the cyan EEG traces are illustrative, not
+            recorded data.</span> My research links the two: what the brain is doing, how the body moves, and how that changes
+            with development.
+          </figcaption>
+        </figure>
+      </div>
+
+      <div class="wrap">
+        <dl class="glance" aria-label="At a glance">
+          <div><dt>Now</dt><dd>M.S. Kinesiology, University of Illinois <span class="nw">Urbana-Champaign</span> <span class="mono">2025–27</span></dd></div>
+          <div><dt>Lab</dt><dd>PLAY Lab, Dr. Shelby Keye</dd></div>
+          <div><dt>Methods</dt><dd>EEG/ERP · fNIRS · motion capture</dd></div>
+          <div><dt>Also</dt><dd>CSCS, former S&amp;C coach</dd></div>
+          <div><dt>Goes by</dt><dd>Rosen</dd></div>
+        </dl>
+      </div>
+    </section>
+
+    <!-- ================= AFFILIATIONS ================= -->
+    <section class="affil" aria-labelledby="affil-h">
+      <div class="wrap affil-inner">
+        <h2 class="affil-label" id="affil-h">Affiliations</h2>
+        <ul class="logos">
+          <li><img src="assets/img/logos/illinois.png" alt="" width="194" height="277" class="logo-i"><span>University of Illinois <span class="nw">Urbana-Champaign</span></span></li>
+          <li><img src="assets/img/logos/playlab.png" alt="" width="407" height="524" class="logo-play"><span>PLAY Lab · Dr. Shelby Keye</span></li>
+          <li><img src="assets/img/logos/bsu.png" alt="" width="141" height="144" class="logo-bsu"><span>Beijing Sport University</span></li>
+          <li><img src="assets/img/logos/springfield.png" alt="" width="211" height="76" class="logo-spring"><span>Springfield College</span></li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- ================= ABOUT ================= -->
+    <section class="sec" id="about" aria-labelledby="about-h">
+      <div class="wrap">
+        <header class="sec-head">
+          <p class="sec-idx">01</p>
+          <h2 id="about-h">About</h2>
+        </header>
+
+        <div class="about-grid">
+          <div class="prose">
+            <p class="lead-p">
+              My path into research started in the weight room. At Beijing Sport University I trained in strength and
+              conditioning and physical education, coached athletes, and joined my first lab study, an eight-week training
+              intervention with college athletes that became a paper in the <em>Journal of Strength and Conditioning Research</em>.
+            </p>
+            <p>
+              A semester at Springfield College brought me to the United States, and my questions began to shift from how the
+              body adapts to how we measure movement, and what the brain is doing while we move. At the University of Illinois
+              <span class="nw">Urbana-Champaign</span>, I now help run two multimodal studies in the PLAY Lab: <a href="#ready">READY</a>, which follows
+              children’s motor, cognitive and academic development as they start school, and <a href="#fame">FAME</a>, which
+              links motor function and fitness with cognition in adults.
+            </p>
+            <p>
+              I also lead <a href="#move">MOVE</a>, a collaboration with Dr. Feng Ji at the University of Toronto that asks
+              whether multimodal large language models can rate movement as reliably as experts, and what evidence is needed
+              before those scores are used.
+            </p>
+            <p>
+              In my PhD, I want to study the neural processes that link cognition, motor behaviour and development, and how
+              physical activity supports brain health.
+            </p>
+          </div>
+          <figure class="photo about-photo">
+            <img src="assets/img/lab.jpg" alt="Ruoxian working at a dual-monitor data-analysis workstation" width="391" height="252" loading="lazy">
+            <figcaption>Research life in the office.</figcaption>
+          </figure>
+        </div>
+
+        <h3 class="sub">Research interests</h3>
+        <ol class="interests">
+          <li class="glow" data-acc="brain">
+            <span class="int-n">01</span>
+            <h4>Neurocognitive and behavioural development</h4>
+            <p>How brain function relates to the growth of cognition, motor skill and academic skills.</p>
+          </li>
+          <li class="glow" data-acc="both">
+            <span class="int-n">02</span>
+            <h4>Brain–movement relationships</h4>
+            <p>Combining EEG/ERP, fNIRS, motion capture and accelerometry to link neural activity with motor function, fitness and physical activity.</p>
+          </li>
+          <li class="glow" data-acc="move">
+            <span class="int-n">03</span>
+            <h4>Measurement of movement</h4>
+            <p>What evidence supports the intended use of movement scores, including those produced by AI.</p>
+          </li>
+        </ol>
+
+        <ul class="stats" aria-label="Key numbers">
+          <li class="stat stat-move">
+            <p class="stat-num"><span aria-hidden="true" data-count="46">46</span><span class="sr-only">46</span></p>
+            <p class="stat-label">participants whose markerless motion-capture data I processed in Theia3D for FAME</p>
+          </li>
+          <li class="stat stat-move">
+            <p class="stat-num"><span aria-hidden="true" data-count="13">13</span><span class="sr-only">13</span></p>
+            <p class="stat-label">movement tasks covered in that processing</p>
+          </li>
+          <li class="stat">
+            <p class="stat-num"><span aria-hidden="true" data-count="4.0" data-decimals="1">4.0</span><span class="sr-only">4.0</span></p>
+            <p class="stat-label">GPA, M.S. in Kinesiology, University of Illinois <span class="nw">Urbana-Champaign</span></p>
+          </li>
+          <li class="stat">
+            <p class="stat-num"><span aria-hidden="true" data-count="3">3</span><span class="sr-only">3</span></p>
+            <p class="stat-label">courses as a graduate teaching assistant, 2026–27</p>
+          </li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- ================= NEWS ================= -->
+    <section class="sec" id="news" aria-labelledby="news-h">
+      <div class="wrap news-grid">
+        <header class="sec-head">
+          <p class="sec-idx">02</p>
+          <h2 id="news-h">News</h2>
+        </header>
+        <ol class="timeline">
+          <li class="is-now"><time datetime="2026-11">Nov 2026</time><p>Applying to PhD programs for Fall 2027.</p></li>
+          <li><time datetime="2026">2026</time><p>Our methods tutorial on AI–human rating agreement is under review at <em>Measurement in Physical Education and Exercise Science</em>.</p></li>
+          <li><time datetime="2026-08">Aug 2026</time><p>Began teaching as a graduate TA for HK 340, HK 102 and HK 271.</p></li>
+          <li><time datetime="2026-04">Apr 2026</time><p>Presented the MOVE study at the Midwest ACSM Mid-Year Virtual Symposium.</p></li>
+          <li><time datetime="2026-04">Apr 2026</time><p>Co-authored two presentations at the University of Illinois <span class="nw">Urbana-Champaign</span> Undergraduate Research Symposium.</p></li>
+          <li><time datetime="2025">2025</time><p>Paper on accentuated loading published in the <em>Journal of Strength and Conditioning Research</em>.</p></li>
+          <li><time datetime="2025-08">Aug 2025</time><p>Started the M.S. in Kinesiology at the University of Illinois <span class="nw">Urbana-Champaign</span> and joined the PLAY Lab.</p></li>
+        </ol>
+      </div>
+    </section>
+
+    <!-- ================= RESEARCH ================= -->
+    <section class="sec" id="research" aria-labelledby="research-h">
+      <div class="wrap">
+        <header class="sec-head">
+          <p class="sec-idx">03</p>
+          <h2 id="research-h">Research</h2>
+          <p class="sec-lede">My projects trace a path from physical adaptation to neurocognitive development.</p>
+        </header>
+
+        <ol class="path" aria-label="Research trajectory">
+          <li class="path-step" data-acc="move"><a href="#ael"><span class="path-dot" aria-hidden="true"></span><span class="path-code">AEL</span><span class="path-theme">Physical adaptation</span></a></li>
+          <li class="path-step" data-acc="move"><a href="#move"><span class="path-dot" aria-hidden="true"></span><span class="path-code">MOVE</span><span class="path-theme">Movement measurement</span></a></li>
+          <li class="path-step" data-acc="both"><a href="#fame"><span class="path-dot" aria-hidden="true"></span><span class="path-code">FAME</span><span class="path-theme">Brain–motor relationships</span></a></li>
+          <li class="path-step path-now" data-acc="brain"><a href="#ready"><span class="path-dot" aria-hidden="true"></span><span class="path-code">READY</span><span class="path-theme">Neurocognitive development</span></a></li>
+          <li class="path-step path-next"><span class="path-inner"><span class="path-dot" aria-hidden="true"></span><span class="path-code">Next</span><span class="path-theme">Neural processes linking cognition, motor behaviour and development</span></span></li>
+        </ol>
+
+        <div class="cards">
+          <!-- READY -->
+          <article class="card glow" id="ready" data-acc="brain" aria-labelledby="ready-h">
+            <figure class="card-fig">
+              <div class="plate"><img src="assets/img/ready-erp.jpg" alt="Grid of grand-average ERP waveforms across EEG channels" width="797" height="341" loading="lazy"></div>
+              <figcaption>Grand-average ERPs after bad-channel removal, prepared for a lab meeting.</figcaption>
+            </figure>
+            <div class="card-body">
+              <div class="card-top">
+                <ul class="chips" aria-label="Methods"><li class="chip chip-brain">EEG</li><li class="chip chip-brain">ERP</li></ul>
+                <p class="card-date">Aug 2025 – present</p>
+              </div>
+              <h3 id="ready-h"><span class="code">READY:</span> Research Enhancing Academic Development in Youth</h3>
+              <p class="card-role">Research Assistant · PLAY Lab, University of Illinois <span class="nw">Urbana-Champaign</span> · PI Dr. Shelby Keye</p>
+              <p class="card-q">A longitudinal, multimodal study of how children’s motor competence, physical activity, cognition and academic skills change as they start school.</p>
+              <button type="button" class="card-toggle" aria-expanded="true" aria-controls="ready-more" hidden><span class="card-toggle-label">Hide details</span><span class="pm" aria-hidden="true"></span></button>
+              <div class="card-more" id="ready-more">
+                <div class="card-more-inner">
+                  <ul class="ticks">
+                    <li>Support participant testing and EEG collection, guiding children through study tasks.</li>
+                    <li>Preprocess EEG in EEGLAB/ERPLAB: data reduction, quality control and manual bad-channel removal.</li>
+                    <li>Produce grand-average ERP waveforms and topographic maps for group-level interpretation.</li>
+                    <li>Train undergraduate research assistants in study procedures and testing protocols.</li>
+                  </ul>
+                  <p class="methods"><span>Methods</span>EEG · ERP · EEGLAB/ERPLAB · MATLAB</p>
+                </div>
+              </div>
+            </div>
+          </article>
+
+          <!-- FAME -->
+          <article class="card glow" id="fame" data-acc="both" aria-labelledby="fame-h">
+            <figure class="card-fig">
+              <div class="plate"><img src="assets/img/fame-fnirs.jpg" alt="fNIRS brain maps of HbO response for congruent and incongruent Flanker trials" width="1132" height="444" loading="lazy"></div>
+              <figcaption>Task-related fNIRS HbO response, Flanker task (congruent vs. incongruent).</figcaption>
+            </figure>
+            <div class="card-body">
+              <div class="card-top">
+                <ul class="chips" aria-label="Methods"><li class="chip chip-brain">fNIRS</li><li class="chip chip-move">Motion capture</li></ul>
+                <p class="card-date">Aug 2025 – present</p>
+              </div>
+              <h3 id="fame-h"><span class="code">FAME:</span> Fitness and Activity for Motor and Executive Function</h3>
+              <p class="card-role">Research Assistant · PLAY Lab, University of Illinois <span class="nw">Urbana-Champaign</span> · PI Dr. Shelby Keye</p>
+              <p class="card-q">How do motor function and physical activity relate to cognitive function in young and middle-aged adults?</p>
+              <button type="button" class="card-toggle" aria-expanded="true" aria-controls="fame-more" hidden><span class="card-toggle-label">Hide details</span><span class="pm" aria-hidden="true"></span></button>
+              <div class="card-more" id="fame-more">
+                <div class="card-more-inner">
+                  <ul class="ticks">
+                    <li>Conduct participant testing and support fNIRS setup and data collection.</li>
+                    <li>Processed markerless motion-capture data in Theia3D for <strong>46 participants across 13 movement tasks</strong>, working independently.</li>
+                    <li>Generated task-related fNIRS brain maps and wrote visualization instructions now used by lab colleagues.</li>
+                  </ul>
+                  <p class="methods"><span>Methods</span>fNIRS · Homer3 · NIRS Toolbox · Theia3D</p>
+                </div>
+              </div>
+            </div>
+          </article>
+
+          <!-- MOVE -->
+          <article class="card glow" id="move" data-acc="move" aria-labelledby="move-h">
+            <figure class="card-fig">
+              <div class="plate plate-dark">
+                <svg class="move-diagram" viewBox="0 0 330 214" role="img" aria-labelledby="move-t">
+                  <title id="move-t">Study design: raw images and pose-based inputs are rated by multimodal LLMs, and AI scores are compared with expert scores</title>
+                  <defs>
+                    <marker id="mv-ah" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0 1L9 5L0 9z" class="dg-head"/></marker>
+                  </defs>
+                  <rect x="14" y="14" width="80" height="74" rx="6" class="dg-frame"/>
+                  <g class="dg-body" transform="translate(54 29)"><circle cx="0" cy="0" r="5.5"/><path d="M0 6v20M0 26l-9 18M0 26l9 18M-14 14l14-5 14 5"/></g>
+                  <text x="54" y="104" class="dg-cap" text-anchor="middle">raw image</text>
+                  <rect x="14" y="116" width="80" height="74" rx="6" class="dg-frame"/>
+                  <g class="dg-pose" transform="translate(54 131)"><path d="M0 6v20M0 26l-9 18M0 26l9 18M-14 14l14-5 14 5"/><circle cx="0" cy="0" r="3.2"/><circle cx="0" cy="9" r="2.4"/><circle cx="-14" cy="14" r="2.4"/><circle cx="14" cy="14" r="2.4"/><circle cx="0" cy="26" r="2.4"/><circle cx="-9" cy="44" r="2.4"/><circle cx="9" cy="44" r="2.4"/></g>
+                  <text x="54" y="206" class="dg-cap" text-anchor="middle">pose keypoints</text>
+                  <path d="M94 51 C124 51 124 102 146 102" class="dg-line" marker-end="url(#mv-ah)"/>
+                  <path d="M94 153 C124 153 124 102 146 102" class="dg-line" marker-end="url(#mv-ah)"/>
+                  <rect x="150" y="80" width="78" height="44" rx="22" class="dg-model"/>
+                  <text x="189" y="99" class="dg-model-t" text-anchor="middle">multimodal</text>
+                  <text x="189" y="113" class="dg-model-t" text-anchor="middle">LLM</text>
+                  <path d="M228 102 L250 102 L250 58 L258 58" class="dg-line" marker-end="url(#mv-ah)"/>
+                  <rect x="262" y="44" width="58" height="28" rx="5" class="dg-frame dg-ai"/>
+                  <text x="291" y="62" class="dg-cap dg-cap-ai" text-anchor="middle">AI score</text>
+                  <rect x="262" y="132" width="58" height="28" rx="5" class="dg-frame"/>
+                  <text x="291" y="150" class="dg-cap" text-anchor="middle">expert</text>
+                  <path d="M291 76 L291 128" class="dg-agree" marker-start="url(#mv-ah)" marker-end="url(#mv-ah)"/>
+                  <text x="285" y="121" class="dg-agree-t" text-anchor="end">agreement</text>
+                </svg>
+              </div>
+              <figcaption>Study design: AI scores from raw and pose-based inputs, evaluated against expert ratings.</figcaption>
+            </figure>
+            <div class="card-body">
+              <div class="card-top">
+                <ul class="chips" aria-label="Methods"><li class="chip chip-move">Movement assessment</li><li class="chip">Multimodal LLMs</li></ul>
+                <p class="card-date">Aug 2024 – present</p>
+              </div>
+              <h3 id="move-h"><span class="code">MOVE:</span> Generative AI for Movement Assessment in Physical Education and Kinesiology</h3>
+              <p class="card-role">Project Lead · University of Illinois <span class="nw">Urbana-Champaign</span> &amp; University of Toronto · Supervisors Dr. Shelby Keye &amp; Dr. Feng Ji</p>
+              <p class="card-q">Can multimodal large language models score human movement the way experts do, and what evidence would justify using those scores?</p>
+              <button type="button" class="card-toggle" aria-expanded="true" aria-controls="move-more" hidden><span class="card-toggle-label">Hide details</span><span class="pm" aria-hidden="true"></span></button>
+              <div class="card-more" id="move-more">
+                <div class="card-more-inner">
+                  <ul class="ticks">
+                    <li>Compared multimodal LLM ratings with expert Functional Movement Screen scores, using raw-image and pose-based inputs.</li>
+                    <li>Designed and refined the prompting and input strategies.</li>
+                    <li>Took the empirical manuscript from research question to journal submission; presented at the 2026 Midwest ACSM Mid-Year Symposium.</li>
+                    <li>Wrote a companion methods tutorial on interpreting AI–human rating agreement for fundamental movement skills, with reproducible R code. It is now under review.</li>
+                  </ul>
+                  <p class="methods"><span>Methods</span>Multimodal LLMs · pose-based input · rater agreement · R</p>
+                </div>
+              </div>
+            </div>
+          </article>
+
+          <!-- AEL -->
+          <article class="card glow" id="ael" data-acc="move" aria-labelledby="ael-h">
+            <figure class="card-fig">
+              <div class="plate"><img src="assets/img/ael-figure.jpg" alt="Schematic of load schemes and repetition structures for the AEL and traditional loading groups" width="944" height="662" loading="lazy"></div>
+              <figcaption>Group load schemes and repetition structures. From Yue et al. (2025), <em>Journal of Strength and Conditioning Research</em>.</figcaption>
+            </figure>
+            <div class="card-body">
+              <div class="card-top">
+                <ul class="chips" aria-label="Methods"><li class="chip chip-move">Training intervention</li><li class="chip">Ultrasound</li></ul>
+                <p class="card-date">2023 – 2024</p>
+              </div>
+              <h3 id="ael-h">Accentuated Eccentric Loading and Muscle Adaptation</h3>
+              <p class="card-role">Research Assistant · Biomechanics Lab, Beijing Sport University · Mentor Caizheng Yue</p>
+              <p class="card-q">How do different accentuated eccentric loading repetition structures affect lower-limb strength and muscle adaptation in college athletes?</p>
+              <button type="button" class="card-toggle" aria-expanded="true" aria-controls="ael-more" hidden><span class="card-toggle-label">Hide details</span><span class="pm" aria-hidden="true"></span></button>
+              <div class="card-more" id="ael-more">
+                <div class="card-more-inner">
+                  <ul class="ticks">
+                    <li>Helped design and run an eight-week training intervention with college athletes.</li>
+                    <li>Collected pre- and post-test data, including ultrasound-based muscle measures.</li>
+                    <li>Ran descriptive analyses and paired <em>t</em>-tests; contributed to figures and the published manuscript.</li>
+                  </ul>
+                  <p class="methods"><span>Methods</span>Training intervention · ultrasound · paired <em>t</em>-tests</p>
+                </div>
+              </div>
+            </div>
+          </article>
+        </div>
+
+        <h3 class="sub">Earlier projects</h3>
+        <ul class="earlier">
+          <li class="glow">
+            <p class="card-date">Jul 2024 – May 2025</p>
+            <h4>Adolescent physical activity and mental health</h4>
+            <p class="card-role">Research Assistant · AI and Prevention Science Lab, University of Florida · PI Dr. Xiaoya Zhang</p>
+            <p>Data cleaning and analysis (<em>t</em>-tests, ANOVA, correlation, regression) on the Future of Families &amp; Child Wellbeing Study.</p>
+          </li>
+          <li class="glow">
+            <p class="card-date">Jun 2024 – Jan 2025</p>
+            <h4>Wearable devices and exercise motivation</h4>
+            <p class="card-role">Undergraduate thesis · Beijing Sport University &amp; Springfield College · Drs. Susan Guyer &amp; Zezhao Chen</p>
+            <p>Designed and ran an online survey of college students in Beijing on wearables, physical activity and exercise motives.</p>
+          </li>
+          <li class="glow">
+            <p class="card-date">Aug – Dec 2024</p>
+            <h4>Musical rhythm and preschoolers’ executive function</h4>
+            <p class="card-role">Research Coordinator · Springfield College · Mentor Bingbing Li</p>
+            <p>Administered executive-function tasks with preschool children.</p>
+          </li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- ================= PUBLICATIONS ================= -->
+    <section class="sec" id="publications" aria-labelledby="pubs-h">
+      <div class="wrap">
+        <header class="sec-head sec-head-row">
+          <div>
+            <p class="sec-idx">04</p>
+            <h2 id="pubs-h">Publications</h2>
+          </div>
+          <div class="filters" role="group" aria-label="Filter publications" hidden>
+            <button type="button" class="filter" data-filter="all" aria-pressed="true">All <span class="filter-n">6</span></button>
+            <button type="button" class="filter" data-filter="journal" aria-pressed="false">Journal articles <span class="filter-n">3</span></button>
+            <button type="button" class="filter" data-filter="presentation" aria-pressed="false">Presentations <span class="filter-n">3</span></button>
+          </div>
+        </header>
+        <p class="sr-only" id="pub-status" aria-live="polite"></p>
+
+        <div class="pub-group" data-group="journal">
+          <h3 class="sub sub-first">Journal articles</h3>
+          <ol class="pubs">
+            <li class="pub">
+              <span class="pub-badge">2025</span>
+              <div class="pub-body">
+                <p class="pub-title">The effects of accentuated loading repetition structures on muscle strength and adaptations</p>
+                <p class="pub-authors">Yue, C., Xiong, W., Zhang, C., <b>Zhang, R.</b>, Deng, K., &amp; Li, Z.</p>
+                <p class="pub-venue"><em>The Journal of Strength and Conditioning Research</em>, 39(12), 1244–1253.</p>
+              </div>
+            </li>
+            <li class="pub">
+              <span class="pub-badge is-status">Under review</span>
+              <div class="pub-body">
+                <p class="pub-title">A tutorial on agreement between AI and human ratings of fundamental movement skills</p>
+                <p class="pub-authors"><b>Zhang, R.</b>, &amp; Ji, F.</p>
+                <p class="pub-venue"><em>Measurement in Physical Education and Exercise Science</em></p>
+              </div>
+            </li>
+            <li class="pub">
+              <span class="pub-badge is-status">Under review</span>
+              <div class="pub-body">
+                <p class="pub-title">Evaluation of AI models for movement assessment: Agreement with experts using raw and pose-based inputs</p>
+                <p class="pub-authors"><b>Zhang, R.</b>, Witte, P. K., Malani, R. N., Ji, F., &amp; Keye, S. A.</p>
+                <p class="pub-venue"><em>Journal of Healthcare Informatics Research</em></p>
+              </div>
+            </li>
+          </ol>
+        </div>
+
+        <div class="pub-group" data-group="presentation">
+          <h3 class="sub">Conference presentations</h3>
+          <ol class="pubs">
+            <li class="pub">
+              <span class="pub-badge">Apr 2026</span>
+              <div class="pub-body">
+                <p class="pub-title">Evaluation of generative AI models for movement assessment: Agreement with experts across LLMs using raw and pose-based inputs</p>
+                <p class="pub-authors"><b>Zhang, R.</b>, Witte, P. K., Malani, R. N., Ji, F., &amp; Keye, S. A.</p>
+                <p class="pub-venue">2026 Midwest ACSM Mid-Year Virtual Symposium</p>
+              </div>
+            </li>
+            <li class="pub">
+              <span class="pub-badge">Apr 2026</span>
+              <div class="pub-body">
+                <p class="pub-title">MIND: Mind-body intervention and neural dynamics. A randomized crossover protocol</p>
+                <p class="pub-authors">Kondagunta, P., Witte, P. K., <b>Zhang, R.</b>, Malani, R. N., &amp; Keye, S. A.</p>
+                <p class="pub-venue">University of Illinois <span class="nw">Urbana-Champaign</span> Undergraduate Research Symposium, Urbana, IL</p>
+              </div>
+            </li>
+            <li class="pub">
+              <span class="pub-badge">Apr 2026</span>
+              <div class="pub-body">
+                <p class="pub-title">Weight, menopause, and movement: Predictors of femoral neck bone density in U.S. women</p>
+                <p class="pub-authors">Edwards, M., Witte, P. K., <b>Zhang, R.</b>, Malani, R. N., &amp; Keye, S. A.</p>
+                <p class="pub-venue">University of Illinois <span class="nw">Urbana-Champaign</span> Undergraduate Research Symposium, Urbana, IL</p>
+              </div>
+            </li>
+          </ol>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= TEACHING ================= -->
+    <section class="sec" id="teaching" aria-labelledby="teaching-h">
+      <div class="wrap">
+        <header class="sec-head">
+          <p class="sec-idx">05</p>
+          <h2 id="teaching-h">Teaching</h2>
+          <p class="sec-lede sec-lede-mono">Graduate Teaching Assistant · University of Illinois <span class="nw">Urbana-Champaign</span> · Aug 2026 – May 2027</p>
+        </header>
+
+        <ul class="courses">
+          <li class="course glow">
+            <p class="course-code">HK 340</p>
+            <h3>Sociology &amp; Psychology of Physical Activity</h3>
+            <p class="course-role">Laboratory instructor</p>
+            <p>Lead two weekly discussion and lab sections (about 50 students), guide class discussion and evaluate student work.</p>
+          </li>
+          <li class="course glow">
+            <p class="course-code">HK 102</p>
+            <h3>Bowling</h3>
+            <p class="course-role">Primary instructor</p>
+            <p>Teach a full section of 40 students; designed the course progression and teach motor-skill execution.</p>
+          </li>
+          <li class="course glow">
+            <p class="course-code">HK 271</p>
+            <h3>Health Equity in the United States</h3>
+            <p class="course-role">Grader</p>
+            <p>Grade coursework and exams, with detailed feedback on health-disparity topics and student writing.</p>
+          </li>
+        </ul>
+
+        <div class="teach-lower">
+          <figure class="photo teach-photo">
+            <img src="assets/img/teaching.jpg" alt="Ruoxian presenting at the front of a classroom" width="839" height="493" loading="lazy">
+            <figcaption>In the classroom, University of Illinois <span class="nw">Urbana-Champaign</span>.</figcaption>
+          </figure>
+          <div>
+            <h3 class="sub sub-first">Coaching &amp; applied work</h3>
+            <ul class="rows">
+              <li><span class="row-when">2024</span><span class="row-what"><strong>Strength &amp; Conditioning Coach</strong>, U18 Ice Hockey Team, Beijing Sport University</span></li>
+              <li><span class="row-when">2024</span><span class="row-what"><strong>Intern</strong>, National Training Base, Beijing Sport University</span></li>
+              <li><span class="row-when">2024</span><span class="row-what"><strong>Volunteer</strong>, TCS New York City Marathon</span></li>
+              <li><span class="row-when">2023</span><span class="row-what"><strong>Track &amp; Field Coach</strong> (100 m), Guangdong Provincial Athletics Team</span></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= EDUCATION ================= -->
+    <section class="sec" id="education" aria-labelledby="education-h">
+      <div class="wrap">
+        <header class="sec-head">
+          <p class="sec-idx">06</p>
+          <h2 id="education-h">Education</h2>
+        </header>
+
+        <ul class="schools">
+          <li class="school">
+            <span class="school-logo"><img src="assets/img/logos/illinois.png" alt="" width="194" height="277"></span>
+            <div class="school-body">
+              <h3>University of Illinois <span class="nw">Urbana-Champaign</span></h3>
+              <p>M.S. in Kinesiology · GPA 4.0</p>
+              <p class="muted">Graduate research and teaching assistant, fully funded</p>
+            </div>
+            <p class="school-when">2025 – 2027<small>expected May 2027</small></p>
+          </li>
+          <li class="school">
+            <span class="school-logo school-logo-wide"><img src="assets/img/logos/springfield.png" alt="" width="211" height="76"></span>
+            <div class="school-body">
+              <h3>Springfield College, Massachusetts</h3>
+              <p>Exchange student · GPA 4.0</p>
+              <p class="muted">Hsu Scholarship, full ride</p>
+            </div>
+            <p class="school-when">Fall 2024</p>
+          </li>
+          <li class="school">
+            <span class="school-logo"><img src="assets/img/logos/bsu.png" alt="" width="141" height="144"></span>
+            <div class="school-body">
+              <h3>Beijing Sport University</h3>
+              <p>B.S. in Strength and Conditioning · B.Ed. in Physical Education</p>
+              <p class="muted">Major GPA 4.0 · cumulative GPA 3.91</p>
+            </div>
+            <p class="school-when">2021 – 2025</p>
+          </li>
+        </ul>
+
+        <div class="edu-lower">
+          <div>
+            <h3 class="sub">Honours &amp; certifications</h3>
+            <ul class="rows">
+              <li><span class="row-when">2025</span><span class="row-what"><strong>Certified Strength and Conditioning Specialist</strong> (CSCS)</span></li>
+              <li><span class="row-when">2025</span><span class="row-what">OEAI certification for teaching assistantships, University of Illinois <span class="nw">Urbana-Champaign</span></span></li>
+              <li><span class="row-when">2024</span><span class="row-what">Hsu Scholarship for exchange study at Springfield College ($17,000)</span></li>
+              <li><span class="row-when">2023</span><span class="row-what">Beijing Sport University Scholarship for Academic Excellence</span></li>
+              <li><span class="row-when">2023</span><span class="row-what">First Prize, Competition of Basic Skills for Physical Education Teaching</span></li>
+              <li><span class="row-when">2021</span><span class="row-what">First place, Shandong Provincial Sports Exam (1st of 25,000)</span></li>
+            </ul>
+          </div>
+          <div>
+            <h3 class="sub">Methods &amp; tools</h3>
+            <dl class="tools">
+              <div data-acc="brain"><dt>Neurophysiology</dt><dd>EEG/ERP (EEGLAB, ERPLAB, Brainstorm) · fNIRS (Homer3, NIRS Toolbox) · E-Prime</dd></div>
+              <div data-acc="move"><dt>Movement</dt><dd>Theia3D markerless motion capture · Visual3D · accelerometry</dd></div>
+              <div><dt>Statistics</dt><dd>Generalized linear models · multivariate regression · longitudinal and repeated-measures analysis · rater agreement</dd></div>
+              <div><dt>Software</dt><dd>R · MATLAB · SPSS · Minitab · Google Colab · LaTeX</dd></div>
+            </dl>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= CONTACT ================= -->
+    <section class="sec sec-contact" id="contact" aria-labelledby="contact-h">
+      <div class="wrap">
+        <div class="contact-panel">
+          <header class="sec-head">
+            <p class="sec-idx">07</p>
+            <h2 id="contact-h">Contact</h2>
+          </header>
+          <p class="contact-line">The best way to reach me is by email.</p>
+          <p><a class="contact-email" href="mailto:rz38@illinois.edu">rz38@illinois.edu</a></p>
+          <p class="contact-meta">
+            <a href="assets/Ruoxian_Zhang_CV.pdf" target="_blank" rel="noopener">Curriculum vitae (PDF) <span aria-hidden="true">↗</span></a>
+            <span>Champaign, Illinois, USA</span>
+          </p>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="wrap footer-inner">
+      <span class="mark mark-sm" aria-hidden="true">rz<i>.</i></span>
+      <p>© <span id="year">2026</span> Ruoxian Zhang · Last updated November 2026</p>
+      <a href="#top">Back to top <span aria-hidden="true">↑</span></a>
+    </div>
+  </footer>
+
+  <script src="script.js" defer></script>
+</body>
+</html>
